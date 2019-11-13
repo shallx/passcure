@@ -20,9 +20,8 @@ class CreateEmailsTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('ref_number')->nullable();
-            $table->string('ref_account')->nullable();
-            $table->string('description')->nullable();
-            $table->timestamps();
+            $table->string('ref_email')->nullable();
+            $table->text('notes')->nullable();
         });
     }
 

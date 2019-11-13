@@ -12,12 +12,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    
 
                     @if(count($emails))
                         @foreach ($emails as $key => $mails)
-                            {{-- @foreach ($mailboxes as $mailbox) --}}
-                                {{-- <h3>{{$mailbox->provider}}</h3> --}}
-                                <h3>{{$key}}</h3>
+                                <h3>{{$key}}</h3> <!-- Provider/Returned value of function($item)/Grouped by column/ -->
                                 <table class="table table-stripped">
                                     <thead>
                                         <tr>
@@ -27,7 +26,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach($mails as $email)
-                                            <tr>
+                                            <tr class="clickable-row" data-href='/emails/{{$email->id}}'>
                                                 <td scope="row">{{$email->email}}</td>
                                                 <td>{{$email->password}} 
                                                     <a class="btn btn-primary float-right" href="emails/{{$email->id}}/edit">Edit</a>
@@ -41,11 +40,35 @@
                                         @endforeach
                                     </tbody>
                                 </table>                              
-                            {{-- @endforeach --}}
                         @endforeach
                     @endif
+                    {{-- Pagination --}}
+                    {{-- <nav aria-label="Page navigation example" class="mx-auto">
+                        <div class="container">
+                                {{$emails->links()}}
+                        </div>
+                    </nav> --}}
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('customscript')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".clickable-row").click(function() {
+                window.location = $(this).data("href");
+            });
+
+            $(".clickable-row").hover(function(){
+                $(this).css('background-color', 'gray');
+            },
+            
+            function(){
+                $(this).css('background-color', 'white')
+            }
+            );
+        });
+    </script>
 @endsection

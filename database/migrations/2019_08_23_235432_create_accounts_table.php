@@ -17,10 +17,12 @@ class CreateAccountsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('email_id');
             $table->integer('catagory_id');
+            $table->string('user_name')->nullable();
+            $table->string('password');
             $table->string('domain_name');
             $table->string('domain_link')->nullable();
             $table->string('domain_picture')->nullable()->default(NULL);
-            $table->string('password');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

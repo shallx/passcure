@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Emails <span class="float-right"><a href="listings/create" class="btn btn-primary">Create Listing</a></span></div>
+                <div class="card-header">Email Info <span class="float-right"><a href="/emails/" class="btn btn-default">Back</a></span></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,41 +13,28 @@
                         </div>
                     @endif
 
-                    @if(count($emails))
-                        <?php
-                            $cnt = 0;
-                        ?>
-                        @foreach ($mailboxes as $mailbox)
-                            <h3>{{$mailbox->provider}}</h3>
-                            <table class="table table-stripped">
-                                <thead>
-                                    <tr>
-                                        <th>Email</th>
-                                        <th>password</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($emails as $email)
-                                        <tr>
-                                        <td scope="row">{{$email->email}}</td>
-                                            <td>{{$email->password}}</td>
-                                            <td class="float-right"><a class="btn btn-primary" href="listings/{{$email->id}}/edit">Edit</a></td>
-                                            <td class="float-right">
-                                                <form action="/listings/{{$email->id}}" method="post">
-                                                    @csrf 
-                                                    @method('delete')
-
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </form> 
-                                            </td>
-
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            
-                        @endforeach
-                    @endif
+                    <div class="show_email_content">
+                        @if($email)
+                        <div class="row">
+                                <div class="col-md-6 p-2 border rounded">Email </div><div class="col-md-6 p-2 border rounded">{{$email->email}}</div>
+                                <div class="col-md-6 p-2 border rounded">Password </div><div class="col-md-6 p-2 border rounded">{{$email->password}}</div>
+                                <div class="col-md-6 p-2 border rounded">Provider </div><div class="col-md-6 p-2 border rounded">{{$email->provider}}</div>
+                                <div class="col-md-6 p-2 border rounded">Reference Number </div><div class="col-md-6 p-2 border rounded">{{$email->ref_number}}</div>
+                                <div class="col-md-6 p-2 border rounded">Reference Account </div><div class="col-md-6 p-2 border rounded">{{$email->ref_email}}</div>
+                                <div class="col-md-6 p-2 border rounded">Notes </div><div class="col-md-6 p-2 border rounded">{{$email->notes}}</div>
+                        </div>
+                            {{-- <ul class="list-group">
+                                
+                                <li class="list-group-item">{{$email->email}}</li>
+                                <li class="list-group-item">{{$email->password}}</li>
+                                <li class="list-group-item">{{$email->provider}}</li>
+                                <li class="list-group-item">{{$email->ref_number}}</li>
+                                <li class="list-group-item">{{$email->ref_email}}</li>
+                                <li class="list-group-item">{{$email->notes}}</li>
+                                
+                            </ul> --}}
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

@@ -24,16 +24,16 @@ class EmailsController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $emails = $user->emails()->orderBy('provider', 'asc')->get();
-        $data = $user->emails()->orderBy('provider', 'asc')->groupBy('provider')->select(DB::raw('count(*) as totals,provider'))->get(); //finding count as grouped
+        //$emails = $user->emails()->orderBy('provider', 'asc')->get();
+        //$data = $user->emails()->orderBy('provider', 'asc')->groupBy('provider')->select(DB::raw('count(*) as totals,provider'))->get(); //finding count as grouped
         $group = $user->emails()->orderBy('provider', 'asc')->get()->groupBy(function($item){
             return $item->provider;
         });
-        $emails2 = Email::where('user_id', $user_id)->orderBy('provider', 'asc')->get(); //Alternative (bad solution)
+        //$emails2 = Email::where('user_id', $user_id)->orderBy('provider', 'asc')->get(); //Alternative (bad solution)
         $mailboxes = Mailbox::all();
         //dd( $group);
 
-        return view('emails/index')->with('emails', $group)->with('mailboxes', $mailboxes);
+        return view('emails.index')->with('emails', $group)->with('mailboxes', $mailboxes);
     }
 
     /**
@@ -66,6 +66,7 @@ class EmailsController extends Controller
         $email->user_id = auth()->user()->id;
         if($request->input('ref_number')) $email->ref_number = $request->input('ref_number');
         if($request->input('ref_email')) $email->ref_email = $request->input('ref_email');
+        if($request->input('notes')) $email->notes = $request->input('notes');
         $email->save();
 
         return redirect('/emails/')->with('success', 'Sucessfully Inserted Email!!');
@@ -79,7 +80,11 @@ class EmailsController extends Controller
      */
     public function show($id)
     {
-        
+        $user = auth()->user()->id;
+        $email = Email::find($id);
+        if($email->user_id != $user) return redirect('/emails');
+
+        return view('emails.show')->with('email', $email);
     }
 
     /**
@@ -90,7 +95,8 @@ class EmailsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $email = Email::find($id);
+        return view('emails.edit')->with('email', $email);
     }
 
     /**
@@ -102,7 +108,15 @@ class EmailsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $email = Email::find($id);
+        $email->email = $request->input('email');
+        $email->password = $request->input('password');
+        $email->provider = $request->input('provider');
+        $email->user_id = auth()->user()->id;
+        if($request->input('ref_number')) $email->ref_number = $request->input('ref_number');
+        if($request->input('ref_email')) $email->ref_email = $request->input('ref_email');
+        $email->save();
+        return redirect('/emails')->with('success', "successfully updated");
     }
 
     /**
@@ -113,7 +127,19 @@ class EmailsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $email = Email::find($id);
+        $email->delete();
+
+        return redirect('/emails')->with('success', 'Email Successfully Deleted!!!');
+    }
+
+    public function search(Request $request)
+    {
+        $search_term = $request->input('search');
+        $responceEmail = Email::where( 'ref_number', 'LIKE', '%' . $search_term . '%' )->get();
+        $responceUser = User::where( 'email', 'LIKE', '%' . $search_term . '%' )->get();
+        return $responceEmail;
+        return view('searchResult')->with('fromEmail', $responceEmail)->with('fromUser', $responceUser);
     }
 
     
