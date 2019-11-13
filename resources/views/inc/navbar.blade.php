@@ -8,6 +8,8 @@
             <li class="nav-item {{Request::is('/') ? 'active' : ''}}">
             <a class="nav-link " href="/">Home <span class="sr-only">(current)</span></a>
             </li>
+
+            @auth
             <li class="nav-item {{Request::is('/emails') ? 'active' : ''}}">
               <a class="nav-link" href="/emails/">Emails</a>
             </li>
@@ -17,6 +19,8 @@
             <li class="nav-item {{Request::is('/accounts') ? 'active' : ''}}">
               <a class="nav-link" href="/CheckCat">Add Catagory</a>
             </li>
+            @endauth
+            
             @unless (Auth::check())
               <li class="nav-item {{Request::is('/login') ? 'active' : ''}}">
                 <a class="nav-link" href="/login">Login</a>

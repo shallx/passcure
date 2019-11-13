@@ -43,4 +43,9 @@ class account extends Model
                 //session(['error' => $e]);
             }
         }
+
+    public function setDomain_NameAttribute($val){
+    
+        $this->attributes['domain_name'] = ucfirst(strtolower($val));
+    }
 }

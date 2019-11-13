@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Catagories </div>
 
@@ -30,14 +30,13 @@
 
                         
                         
-                    <h4 class="mt-3">Add Catagories Name</h4>
-                    <form action="/AddCats" method="POST">
+                    <h4 class="clearfix">Add Catagories Name</h4>
+                    <form action="/AddCats" method="POST" class="form-inline mt-3">
                         @csrf
                         <div class="form-group">
-                            <label for="">Catagory Name</label>
-                            <input type="text" name="catagory" id="" class="form-control" placeholder="Add Catagory here">
+                            <input type="text" name="catagory" id="" class="form-control"  placeholder="Add Catagory here">
                         </div>
-                        <input type="submit" class="btn btn-primary" value="Add">
+                        <input type="submit" class="btn btn-primary ml-2" value="Add">
                     </form>
                         
                         

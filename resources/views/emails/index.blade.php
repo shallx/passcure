@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Emails <span class="float-right"><a href="emails/create" class="btn btn-primary">Add Email</a></span></div>
 
@@ -16,26 +16,29 @@
 
                     @if(count($emails))
                         @foreach ($emails as $key => $mails)
-                                <h3>{{$key}}</h3> <!-- Provider/Returned value of function($item)/Grouped by column/ -->
-                                <table class="table table-stripped">
+                                <h3 class="text-center"><b>{{$key}}</b></h3> <!-- Provider/Returned value of function($item)/Grouped by column/ -->
+                                <table class="table table-bordered table-dark">
                                     <thead>
-                                        <tr>
-                                            <th class="w-50">Email</th>
-                                            <th class="w-50">Password</th>
+                                        <tr class="text-center">
+                                            <th class="w-50 bg-warning text-dark">Email</th>
+                                            <th class="w-25 bg-warning text-dark">Password</th>
+                                            <th class="w-25 bg-warning text-dark">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($mails as $email)
-                                            <tr class="clickable-row" data-href='/emails/{{$email->id}}'>
+                                            {{-- <tr class="clickable-row" data-href='/emails/{{$email->id}}'> --}}
+                                            <tr>
                                                 <td scope="row">{{$email->email}}</td>
-                                                <td>{{$email->password}} 
-                                                    <a class="btn btn-primary float-right" href="emails/{{$email->id}}/edit">Edit</a>
-                                                        <form action="/emails/{{$email->id}}" method="post" class="float-right">
-                                                            @csrf 
-                                                            @method('delete')
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                                        </form> 
-                                                </td>
+                                                <td>{{$email->password}}</td>
+                                                <td>
+                                                    <a class="btn btn-success float-left p-1 mx-1" href="emails/{{$email->id}}">Show</a>
+                                                    <a class="btn btn-primary float-left p-1 mx-1" href="emails/{{$email->id}}/edit">Edit</a>
+                                                    <form action="/emails/{{$email->id}}" method="post" class="form-inline">
+                                                        @csrf 
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-danger p-1 mx-1">Delete</button>
+                                                    </form>
                                             </tr>
                                         @endforeach
                                     </tbody>

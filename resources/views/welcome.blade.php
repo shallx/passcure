@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2 class="text-center mt-3"><b>PASSCURE</b></h2>
-    <div class="home_main mt-3">
+<div class="container" id="full_container">
+    <div class="" id="main">
+        <h2 class="text-center my-3"><b>PASSCURE</b></h2>
+
         <h4>Q. What is passcure?</h4>
         <p>Ans: It's an application developed for securing password, thus the name pass-cure(Password Secure)</p>
 
@@ -22,5 +23,6 @@
 
         </ul>
     </div>
+
 </div>
 @endsection

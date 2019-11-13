@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">Accounts <span class="float-right"><a href="accounts/create" class="btn btn-primary">Add Account</a></span></div>
+                <div class="card-header">Accounts <span class="float-right"><a href="accounts/create" class="btn btn-secondary">Add Account</a></span></div>
 
                 <div class="card-body">
                     @if (session('status'))
