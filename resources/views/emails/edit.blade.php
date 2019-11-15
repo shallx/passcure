@@ -37,6 +37,10 @@
                           <label for="ref_email">Reference Email</label>
                           <input type="text" name="ref_email" id="" class="form-control" placeholder="Enter reference email" aria-describedby="helpId" value="{{$email->ref_email}}">
                         </div>
+                        <div class="form-group">
+                          <label for="notes">Notes</label>
+                        <textarea type="text" name="notes" id="" class="form-control" placeholder="Enter Additional Notes" rows=4 style="resize:none">{{$email->notes}}</textarea>
+                      </div>
                 
                         <input type="submit" name="submit" value="Submit" class="btn btn-primary">
                     </form>

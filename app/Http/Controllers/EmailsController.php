@@ -67,6 +67,7 @@ class EmailsController extends Controller
         if($request->input('ref_number')) $email->ref_number = $request->input('ref_number');
         if($request->input('ref_email')) $email->ref_email = $request->input('ref_email');
         if($request->input('notes')) $email->notes = $request->input('notes');
+        
         $email->save();
 
         return redirect('/emails/')->with('success', 'Sucessfully Inserted Email!!');
@@ -78,7 +79,7 @@ class EmailsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $user = auth()->user()->id;
         $email = Email::find($id);
@@ -115,6 +116,7 @@ class EmailsController extends Controller
         $email->user_id = auth()->user()->id;
         if($request->input('ref_number')) $email->ref_number = $request->input('ref_number');
         if($request->input('ref_email')) $email->ref_email = $request->input('ref_email');
+        if($request->input('notes')) $email->notes = $request->input('notes');
         $email->save();
         return redirect('/emails')->with('success', "successfully updated");
     }

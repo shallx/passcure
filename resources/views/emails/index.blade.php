@@ -20,9 +20,9 @@
                                 <table class="table table-bordered table-dark">
                                     <thead>
                                         <tr class="text-center">
-                                            <th class="w-50 bg-warning text-dark">Email</th>
-                                            <th class="w-25 bg-warning text-dark">Password</th>
-                                            <th class="w-25 bg-warning text-dark">Action</th>
+                                            <th class="w-50 bg-warning text-dark" scope="col">Email</th>
+                                            <th class="w-25 bg-warning text-dark" scope="col">Password</th>
+                                            <th class="w-25 bg-warning text-dark" scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -34,11 +34,39 @@
                                                 <td>
                                                     <a class="btn btn-success float-left p-1 mx-1" href="emails/{{$email->id}}">Show</a>
                                                     <a class="btn btn-primary float-left p-1 mx-1" href="emails/{{$email->id}}/edit">Edit</a>
-                                                    <form action="/emails/{{$email->id}}" method="post" class="form-inline">
+                                                    <form action="/emails/{{$email->id}}" method="post" class="float-left">
                                                         @csrf 
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-danger p-1 mx-1">Delete</button>
-                                                    </form>
+                                                        <button type="button" class="delete btn btn-danger p-1 mx-1" data-toggle="modal" data-target="#deleteModal" data-did="{{$email->id}}">
+                                                            Delete
+                                                        </button>
+        
+                                                            <!-- Modal -->
+                                                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title text-dark" id="exampleModalLabel text-center">Delete Email?</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body text-dark">
+                                                                    <h6>Are you sure You want to <span class="text-danger">Delete</span> this email?</h6>
+                                                                    <p>Press <span class="text-success">Confirm</span> to Delete!!</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                                                                    <form action="" method="post" class="deleteForm float-left">
+                                                                        @csrf 
+                                                                        @method('delete')
+                                                                        <button type="submit" class="confirm btn btn-danger" onclick>Confirm</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>  
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -60,6 +88,13 @@
 @section('customscript')
     <script type="text/javascript">
         $(document).ready(function() {
+            $(".delete").click(function() {
+                id = $(this).attr("data-did");
+                var x = document.getElementsByClassName('deleteForm');
+                for(i=0; i<x.length;i++){
+                    x[i].action = "/emails/" + id;
+                }
+            });
             $(".clickable-row").click(function() {
                 window.location = $(this).data("href");
             });
