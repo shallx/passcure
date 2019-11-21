@@ -1,6 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel text-center">Delete Email?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <h6>Are you sure You want to <span class="text-danger">Delete</span> this account?</h6>
+                    <p>Press <span class="text-success">Confirm</span> to Delete!!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                    <form action="" method="post" class="deleteForm float-left">
+                        @csrf 
+                        @method('delete')
+                        <button type="submit" class="confirm btn btn-danger" onclick>Confirm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <!--Modal Close-->
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
@@ -12,6 +38,8 @@
                             {{ session('status') }}
                         </div>
                     @endif
+
+                    <p class="ml-2 mb-2">Show all-> <button type="button" class="showAllBtn btn p-0" ><i class="far fa-eye text-success p-0"></i></i></button></p>
 
                     {{-- Sort By Catagories,Accounts or Email --}}
                     <div class="SortBy clearfix mb-3">
@@ -41,42 +69,14 @@
                                             <td>{{$account->domain_name}}</td>
                                             <td>{{$account->email->email}}</td>
                                             <td>{{$account->user_name}}</td>
-                                            <td>{{$account->password}}</td>
+                                            <td class="pass{{$account->id}}"><input type="password" class="form-control-plaintext text-white p-0 m-0" value="{{$account->password}}"></td>
                                             <td>
-                                                <a class="btn btn-success float-left p-1 mx-1" href="accounts/{{$account->id}}">Show</a>
-                                                <a class="btn btn-primary float-left p-1 mx-1" href="accounts/{{$account->id}}/edit">Edit</a>
-                                                <form action="/accounts/{{$account->id}}" method="post" class="float-left">
-                                                    @csrf 
-                                                    @method('delete')
-                                                    <button type="button" class="delete btn btn-danger p-1 mx-1" data-toggle="modal" data-target="#deleteModal" data-did="{{$account->id}}">
-                                                        Delete
-                                                    </button>
-        
-                                                        <!-- Modal -->
-                                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title text-dark" id="exampleModalLabel text-center">Delete Email?</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body text-dark">
-                                                                <h6>Are you sure You want to <span class="text-danger">Delete</span> this account?</h6>
-                                                                <p>Press <span class="text-success">Confirm</span> to Delete!!</p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
-                                                                <form action="" method="post" class="deleteForm float-left">
-                                                                    @csrf 
-                                                                    @method('delete')
-                                                                    <button type="submit" class="confirm btn btn-danger" onclick>Confirm</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    </div>     
+                                                <a class="btn btn-outline-success float-left p-1 mx-1" href="accounts/{{$account->id}}">Show</a>
+                                                <a class="btn btn-outline-primary float-left p-1 mx-1" href="accounts/{{$account->id}}/edit">Edit</a>
+                                                <button type="button" class="delete btn btn-outline-danger p-1 mx-1" data-toggle="modal" data-target="#deleteModal" data-did="{{$account->id}}">
+                                                    Delete
+                                                </button>
+                                                <button type="button" class="btn p-0 showBtn" data-id="{{$account->id}}"><i class="far fa-eye text-success p-0"></i></i></button>       
                                             </td>
                                         </tr>
                                 </tbody>
@@ -100,6 +100,7 @@
 @endsection
 
 @section('customscript')
+    <script type="text/javascript" src="{{asset('js/togglePassVis.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $(".delete").click(function() {
@@ -109,18 +110,6 @@
                     x[i].action = "/accounts/" + id;
                 }
             });
-            $(".clickable-row").click(function() {
-                window.location = $(this).data("href");
-            });
-
-            $(".clickable-row").hover(function(){
-                $(this).css('background-color', 'gray');
-            },
-            
-            function(){
-                $(this).css('background-color', 'white')
-            }
-            );
         });
     </script>
 @endsection
