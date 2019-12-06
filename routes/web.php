@@ -17,10 +17,11 @@ Route::get('/', function () {
 
 Route::resource('emails', 'EmailsController');
 Route::resource('accounts', 'AccountsController');
-Route::get('/search', 'EmailsController@search');
+Route::any('search', 'HomeController@search');
 Route::get('/SortByCat', 'AccountsController@SortByCat');
 Route::get('/SortByAcc', 'AccountsController@SortByAcc');
 Route::get('/SortByEmail', 'AccountsController@SortByEmail');
+Route::get('/GroupByEmail', 'AccountsController@GroupByEmail');
 Route::get('/GroupByCat', 'AccountsController@GroupByCat');
 Route::get('/CheckCat', 'AccountsController@CheckCatagory');
 Route::post('/AddCats', 'AccountsController@AddCatagory');

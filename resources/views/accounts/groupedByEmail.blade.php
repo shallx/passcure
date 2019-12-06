@@ -38,6 +38,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    
 
                     <p class="ml-2 mb-2">Show all-> <button type="button" class="showAllBtn btn p-0" ><i class="far fa-eye text-success p-0"></i></i></button></p>
 
@@ -46,15 +47,16 @@
                         <a href="/SortByCat" class="btn btn-outline-primary float-left p-1 mx-1 ">Sort By Catagory</a>
                         <a href="/SortByAcc" class="btn btn-outline-primary float-left p-1 mx-1 ">Sort By Accounts</a>
                         <a href="/SortByEmail" class="btn btn-outline-primary float-left p-1 mx-1 ">Sort By Email</a>
-                        <a href="/GroupByCat" class="btn btn-primary float-left p-1 mx-1 ">Group By Catagory</a>
-                        <a href="/GroupByEmail" class="btn btn-outline-primary float-left p-1 mx-1 ">Group By Email</a>
+                        <a href="/GroupByCat" class="btn btn-outline-primary float-left p-1 mx-1 ">Group By Catagory</a>
+                        <a href="/GroupByEmail" class="btn btn-primary float-left p-1 mx-1 ">Group By Email</a>
                     </div>
                     
 
                     @if(count($accounts))
-                        @foreach ($accounts as $catagory_id => $accounts)
-                            <h4 class="text-center "><b>{{$cat_listArray[$catagory_id]}}</b></h4>
-
+                        @foreach ($accounts as $email_id => $accounts)
+                            <div class="col-12 p-0">
+                                <h4 class="text-center border rounded p-3 bg-dark text-white"><b><b>{{$emailArr[$email_id]}}</b></b></h4>
+                            </div>
                             
                             <table class="table table-bordered table-dark">
                                 <thead class="text-center">

@@ -36,10 +36,18 @@
                 <input type="submit" value="Logout" class="btn btn-outline-danger mr-2">
               </form>
           @endauth
-          <form class="form-inline mt-2 mt-md-0" action="/search" method='get'>
+          @auth
+          <form class="mt-2 mt-md-0" action="/search" method='post'>
             @csrf
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">
-            <input type="submit" value='Search' class="btn btn-outline-success my-2 my-sm-0" >
+            <div class="row">
+              <div class="col-9">
+                  <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="search">
+              </div>
+              <div class="col-3 p-0">
+                  <input type="submit" value='Search' class="btn btn-outline-success form-control" >
+              </div>
+            </div>
           </form>
+          @endauth
         </div>
       </nav>

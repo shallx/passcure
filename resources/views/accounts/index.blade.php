@@ -45,10 +45,11 @@
 
                     {{-- Sort By Catagories,Accounts or Email --}}
                     <div class="SortBy clearfix mb-2">
-                        <a href="/SortByCat" class="btn btn-outline-primary float-left p-1 mx-1 ">Sort By Catagory</a>
-                        <a href="/SortByAcc" class="btn btn-outline-primary float-left p-1 mx-1 ">Sort By Accounts</a>
-                        <a href="/SortByEmail" class="btn btn-outline-primary float-left p-1 mx-1 ">Sort By Email</a>
-                        <a href="/GroupByCat" class="btn btn-outline-primary float-left p-1 mx-1 ">Group By Catagory</a>
+                        <a href="/SortByCat" class="btn float-left p-1 mx-1 {{Request::is('SortByCat') ? 'btn-primary' : 'btn-outline-primary'}}">Sort By Catagory</a>
+                        <a href="/SortByAcc" class="btn float-left p-1 mx-1 {{Request::is('SortByAcc') ? 'btn-primary' : 'btn-outline-primary'}}">Sort By Accounts</a>
+                        <a href="/SortByEmail" class="btn float-left p-1 mx-1 {{Request::is('SortByEmail') ? 'btn-primary' : 'btn-outline-primary'}}">Sort By Email</a>
+                        <a href="/GroupByCat" class="btn float-left p-1 mx-1 {{Request::is('GroupByCat') ? 'btn-primary' : 'btn-outline-primary'}}">Group By Catagory</a>
+                        <a href="/GroupByEmail" class="btn float-left p-1 mx-1 {{Request::is('GroupByEmail') ? 'btn-primary' : 'btn-outline-primary'}}">Group By Email</a>
                     </div>
                     
 

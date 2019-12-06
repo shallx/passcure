@@ -152,8 +152,15 @@ class AccountsController extends Controller
         $authUser = auth()->user()->id;
         $user = User::find($authUser);
         $emails = $user->emails;
+        $accounts = $user->accounts()->orderBy('email_id', 'asc')->orderBy('domain_name', 'asc')->get()->groupBy(function($item){
+            return $item->email_id;
+        });;
+        $emailArr = array();
+        foreach($emails as $email){
+            $emailArr[$email->id] = $email->email;
+        }
  
-        return view('accounts.sorted')->with('emails', $emails);
+        return view('accounts.groupedByEmail')->with('accounts', $accounts)->with('emailArr', $emailArr);
     }
 
     public function GroupByCat(){
@@ -173,8 +180,8 @@ class AccountsController extends Controller
 
     public function CheckCatagory(){
         $cat_checker = Catagory::all();
-
         return view('accounts.addCat')->with('catagories', $cat_checker);
+
     }
 
     public function AddCatagory(Request $responce){

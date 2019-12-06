@@ -73,13 +73,11 @@
                                     </tbody>
                                 </table>                              
                         @endforeach
+                        @else
+                            <div class="alert alert-danger"><h4>No Emails Found</h4></div>
                     @endif
-                    {{-- Pagination --}}
-                    {{-- <nav aria-label="Page navigation example" class="mx-auto">
-                        <div class="container">
-                                {{$emails->links()}}
-                        </div>
-                    </nav> --}}
+
+                
                 </div>
             </div>
         </div>
