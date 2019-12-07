@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\User;
 use App\Email;
 use App\Account;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -30,12 +31,14 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
         $validate = $request->validate([
             'search' => 'required',
          ]);
         
         $search_term = $request->input('search');
-        $emailResults = Email::where( 'provider', 'LIKE', '%' . $search_term . '%' )
+        $emailResults = $user->emails()->where( 'provider', 'LIKE', '%' . $search_term . '%' )
             ->orWhere( 'email', 'LIKE', '%' . $search_term . '%' )
             ->orWhere( 'ref_number', 'LIKE', '%' . $search_term . '%' )
             ->orWhere( 'ref_email', 'LIKE', '%' . $search_term . '%' )
@@ -46,7 +49,7 @@ class HomeController extends Controller
         // search with sub query and takes first parameter as model name of foreign emails table, it returns 'email_id'
         // which eloquent uses to find the data
         
-        $accountResults = Account::where( 'user_name', 'LIKE', '%' . $search_term . '%' )
+        $accountResults = $user->accounts()->where( 'user_name', 'LIKE', '%' . $search_term . '%' )
         ->orWhereHas('email',function($query) use ($search_term){
             $query->where('email', 'LIKE', '%' . $search_term . '%' );
         }) 

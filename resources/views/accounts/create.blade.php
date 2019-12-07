@@ -3,7 +3,7 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">Add Account <span class="float-right"><a href="/accounts" class="btn btn-secondary">Back</a></span></div>
 
                 <div class="card-body">

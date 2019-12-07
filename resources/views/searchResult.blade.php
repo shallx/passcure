@@ -4,7 +4,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">Search Results ( {{count($accountResults)}} ) <span class="float-right"><a href="peoples" class="btn btn-default border">Back</a></span></div> 
                 <div class="card-body mt-2">
                     @if (session('status'))
@@ -13,10 +13,10 @@
                         </div>
                     @endif
                     <div class="row">
+                        <div class="col-12 p-0">
+                            <h3 class="text-center border rounded p-3 bg-dark text-white"><b>ACCOUNT RESULTS </b></h3>
+                        </div>
                         @if(count($accountResults))
-                            <div class="col-12 p-0">
-                                <h3 class="text-center border rounded p-3 bg-dark text-white"><b>ACCOUNT RESULTS </b></h3>
-                            </div>
                             <table class="table table-bordered table-dark">
                                 <thead class="text-center">
                                     <th class="bg-warning text-dark" scope="col">Web Name</th>
@@ -53,10 +53,11 @@
                                 
                         @endif
 
+                        <div class="col-12 p-0">
+                            <h3 class="text-center border rounded p-3 bg-dark text-white"><b>EMAIL RESULTS </b></h3>
+                        </div>
+                        
                         @if(count($emailResults))
-                            <div class="col-12 p-0">
-                                <h3 class="text-center border rounded p-3 bg-dark text-white"><b>EMAIL RESULTS </b></h3>
-                            </div>
                             <table class="table table-bordered table-dark">
                                 <thead>
                                     <tr class="text-center">
@@ -86,7 +87,7 @@
                             @else
                                 <div class="col-12">
                                     <div class="alert alert-danger"><h6>Email: {{$errorMsgEmail}}</h6></div>
-                                </div>>
+                                </div>
                         @endif
                     </div>
                 </div>

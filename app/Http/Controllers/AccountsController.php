@@ -23,7 +23,9 @@ class AccountsController extends Controller
 
     public function index()
     {
-        $accounts = Account::orderBy('domain_name', 'asc')->get();
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        $accounts = $user->accounts()->orderBy('domain_name', 'asc')->get();
         return view('accounts.index')->with('accounts', $accounts);
     }
 
@@ -34,7 +36,9 @@ class AccountsController extends Controller
      */
     public function create()
     {
-        $emails = Email::all();
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        $emails = $user->emails()->get();
         $catagories = Catagory::all();
         return view('accounts/create')->with('emails', $emails)->with('catagories', $catagories);
     }
@@ -88,9 +92,12 @@ class AccountsController extends Controller
      */
     public function edit($id)
     {
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        $emails = $user->emails()->get();
         $account = Account::find($id);
-        $emails = Email::all();
         $catagories = Catagory::all();
+        if($account->email->user_id != $user) return redirect('/accounts/');
         return view('accounts.edit')->with('account', $account)->with('emails', $emails)->with('catagories', $catagories);
     }
 
@@ -128,23 +135,28 @@ class AccountsController extends Controller
      */
     public function destroy($id)
     {
+      
         $account = Account::find($id);
         $account->delete();
         return redirect('/accounts/')->with('success', 'Successfully Deleted Account');
     }
 
     public function SortByCat(){
-        $accounts = Account::orderBy('catagory_id', 'asc')->orderBy('domain_name', 'asc')->get();
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        $accounts = $user->accounts()->orderBy('catagory_id', 'asc')->orderBy('domain_name', 'asc')->get();
         return view('accounts.index')->with('accounts', $accounts);
     }
 
     public function SortByAcc(){
-        $accounts = Account::orderBy('domain_name', 'asc')->get();;
+        $user = User::find(auth()->user()->id);
+        $accounts = $user->accounts()->orderBy('domain_name', 'asc')->get();;
         return view('accounts.index')->with('accounts', $accounts);
     }
 
     public function SortByEmail(){
-        $accounts = Account::orderBy('email_id', 'asc')->get();
+        $user = User::find(auth()->user()->id);
+        $accounts = $user->accounts()->orderBy('email_id', 'asc')->get();
         return view('accounts.index')->with('accounts', $accounts);
     }
 

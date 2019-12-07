@@ -30,7 +30,7 @@
         <!--Modal End-->
 
         <div class="col-md-10">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">Emails
                     <span class="float-right"><a href="emails/create" class="btn btn-primary">Add Email</a></span>
                 </div>
