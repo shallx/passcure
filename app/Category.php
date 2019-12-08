@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class catagory extends Model
+class category extends Model
 {
     protected $fillable = [
         'account_type',

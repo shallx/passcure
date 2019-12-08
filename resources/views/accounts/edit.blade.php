@@ -30,13 +30,13 @@
                             </select>
                           </div>
                           <div class="form-group">
-                            <label for="catagory">Catagory</label>
-                            <select class="form-control" name="catagory_id" >
-                                @foreach ($catagories as $catagory)
-                                    @if($catagory->id == $account->catagory_id)
-                                        <option value="{{$catagory->id}}" selected>{{$catagory->account_type}}</option>
+                            <label for="category">Category</label>
+                            <select class="form-control" name="category_id" >
+                                @foreach ($categories as $category)
+                                    @if($category->id == $account->category_id)
+                                        <option value="{{$category->id}}" selected>{{$category->account_type}}</option>
                                     @else
-                                        <option value="{{$catagory->id}}">{{$catagory->account_type}}</option>
+                                        <option value="{{$category->id}}">{{$category->account_type}}</option>
                                     @endif
                                 @endforeach
                             </select>

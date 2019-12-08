@@ -25,10 +25,10 @@
                             </select>
                           </div>
                           <div class="form-group">
-                            <label for="catagory">Catagory</label>
-                            <select class="form-control" name="catagory_id" >
-                                @foreach ($catagories as $catagory)
-                                    <option value="{{$catagory->id}}">{{$catagory->account_type}}</option>
+                            <label for="category">Category</label>
+                            <select class="form-control" name="category_id" >
+                                @foreach ($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->account_type}}</option>
                                 @endforeach
                             </select>
                             </div>

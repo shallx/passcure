@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Email;
 use App\Account;
-use App\Catagory;
+use App\Category;
 use Illuminate\Http\Request;
 
 class AccountsController extends Controller
@@ -39,8 +39,8 @@ class AccountsController extends Controller
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $emails = $user->emails()->get();
-        $catagories = Catagory::all();
-        return view('accounts/create')->with('emails', $emails)->with('catagories', $catagories);
+        $categories = Category::all(); 
+        return view('accounts/create')->with('emails', $emails)->with('categories', $categories);
     }
 
     /**
@@ -60,7 +60,7 @@ class AccountsController extends Controller
         $account = new Account;
         $account->user_id = $user_id;
         $account->email_id = $request->input('email_id');
-        $account->catagory_id = $request->input('catagory_id');
+        $account->category_id = $request->input('category_id'); 
         if($request->input('user_name')) $account->user_name = $request->input('user_name');
         $account->password = $request->input('password');
         $account->domain_name = $request->input('domain_name');
@@ -96,9 +96,9 @@ class AccountsController extends Controller
         $user = User::find($user_id);
         $emails = $user->emails()->get();
         $account = Account::find($id);
-        $catagories = Catagory::all();
-        if($account->email->user_id != $user) return redirect('/accounts/');
-        return view('accounts.edit')->with('account', $account)->with('emails', $emails)->with('catagories', $catagories);
+        $categories = Category::all(); // Category is model name with wrong spelling but functional
+        if($account->email->user_id != $user_id) return redirect('/accounts/');
+        return view('accounts.edit')->with('account', $account)->with('emails', $emails)->with('categories', $categories);
     }
 
     /**
@@ -117,7 +117,7 @@ class AccountsController extends Controller
         ]);
         $account = Account::find($id);
         $account->email_id = $request->input('email_id');
-        $account->catagory_id = $request->input('catagory_id');
+        $account->category_id = $request->input('category_id'); 
         if($request->input('user_name')) $account->user_name = $request->input('user_name');
         $account->password = $request->input('password');
         $account->domain_name = $request->input('domain_name');
@@ -144,7 +144,7 @@ class AccountsController extends Controller
     public function SortByCat(){
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $accounts = $user->accounts()->orderBy('catagory_id', 'asc')->orderBy('domain_name', 'asc')->get();
+        $accounts = $user->accounts()->orderBy('category_id', 'asc')->orderBy('domain_name', 'asc')->get(); 
         return view('accounts.index')->with('accounts', $accounts);
     }
 
@@ -178,30 +178,30 @@ class AccountsController extends Controller
     public function GroupByCat(){
         $authUser = auth()->user()->id;
         $user = User::find($authUser);
-        $accounts = $user->accounts()->orderBy('catagory_id', 'asc')->orderBy('domain_name', 'asc')->get()->groupBy(function($item){
-            return $item->catagory_id;
+        $accounts = $user->accounts()->orderBy('category_id', 'asc')->orderBy('domain_name', 'asc')->get()->groupBy(function($item){
+            return $item->category_id;
         });
-        $catagories = Catagory::all();
+        $categories = Category::all();
         $cat_listArray = array();
-        foreach($catagories as $cat){
+        foreach($categories as $cat){
             $cat_listArray[$cat->id] = $cat->account_type;
         }
 
         return view('accounts.groupedByCat')->with('accounts', $accounts)->with('cat_listArray', $cat_listArray);
     }
 
-    public function CheckCatagory(){
-        $cat_checker = Catagory::all();
-        return view('accounts.addCat')->with('catagories', $cat_checker);
+    public function CheckCategory(){
+        $cat_checker = Category::all();
+        return view('accounts.addCat')->with('categories', $cat_checker);
 
     }
 
-    public function AddCatagory(Request $responce){
-        $catagory = new Catagory;
-        $catagory->account_type = $responce->input('catagory');
-        $catagory->save();
-        $cat_checker = Catagory::all();
-        return view('accounts.addCat')->with('catagories', $cat_checker);;
+    public function AddCategory(Request $responce){
+        $category = new Category;
+        $category->account_type = $responce->input('category');
+        $category->save();
+        $cat_checker = Category::all();
+        return view('accounts.addCat')->with('categories', $cat_checker);;
     }
 
     

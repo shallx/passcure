@@ -43,12 +43,12 @@
 
                     <p class="ml-2 mb-2">Show all-> <button type="button" class="showAllBtn btn p-0" ><i class="far fa-eye text-success p-0"></i></i></button></p>
 
-                    {{-- Sort By Catagories,Accounts or Email --}}
+                    {{-- Sort By Categories,Accounts or Email --}}
                     <div class="SortBy clearfix mb-2">
-                        <a href="/SortByCat" class="btn float-left p-1 mx-1 {{Request::is('SortByCat') ? 'btn-primary' : 'btn-outline-primary'}}">Sort By Catagory</a>
+                        <a href="/SortByCat" class="btn float-left p-1 mx-1 {{Request::is('SortByCat') ? 'btn-primary' : 'btn-outline-primary'}}">Sort By Category</a>
                         <a href="/SortByAcc" class="btn float-left p-1 mx-1 {{Request::is('SortByAcc') ? 'btn-primary' : 'btn-outline-primary'}}">Sort By Accounts</a>
                         <a href="/SortByEmail" class="btn float-left p-1 mx-1 {{Request::is('SortByEmail') ? 'btn-primary' : 'btn-outline-primary'}}">Sort By Email</a>
-                        <a href="/GroupByCat" class="btn float-left p-1 mx-1 {{Request::is('GroupByCat') ? 'btn-primary' : 'btn-outline-primary'}}">Group By Catagory</a>
+                        <a href="/GroupByCat" class="btn float-left p-1 mx-1 {{Request::is('GroupByCat') ? 'btn-primary' : 'btn-outline-primary'}}">Group By Category</a>
                         <a href="/GroupByEmail" class="btn float-left p-1 mx-1 {{Request::is('GroupByEmail') ? 'btn-primary' : 'btn-outline-primary'}}">Group By Email</a>
                     </div>
                     

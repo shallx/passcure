@@ -98,7 +98,7 @@ class EmailsController extends Controller
     {
         $user = User::find(auth()->user()->id);
         $email = Email::find($id);
-        if($email->email->user_id != $user) return redirect('/emails/');
+        if($email->user_id != $user->id) return redirect('/emails/');
         return view('emails.edit')->with('email', $email);
     }
 

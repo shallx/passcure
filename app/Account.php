@@ -11,15 +11,15 @@ class account extends Model
 {
     private $customKey = "861EC41CEE4D3C9F9F7255444F393CA0"; //AES-128-cbc (Custom Generated Key)
     protected $fillable = [
-        'domain_name', 'domain_link', 'domain_picture', 'password', 'email_id', 'catagory_id', 'user_name', 'notes', 'user_id',
+        'domain_name', 'domain_link', 'domain_picture', 'password', 'email_id', 'category_id', 'user_name', 'notes', 'user_id',
     ];
 
     public function email(){
         return $this->belongsTo('App\Email');
     }
 
-    public function catagory(){
-        return $this->belongsTo('App\Catagory');
+    public function category(){
+        return $this->belongsTo('App\Category'); //Catagory Model spelling is wrong but functional
     }
 
     

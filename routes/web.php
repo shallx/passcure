@@ -23,8 +23,8 @@ Route::get('/SortByAcc', 'AccountsController@SortByAcc');
 Route::get('/SortByEmail', 'AccountsController@SortByEmail');
 Route::get('/GroupByEmail', 'AccountsController@GroupByEmail');
 Route::get('/GroupByCat', 'AccountsController@GroupByCat');
-Route::get('/CheckCat', 'AccountsController@CheckCatagory');
-Route::post('/AddCats', 'AccountsController@AddCatagory');
+Route::get('/CheckCat', 'AccountsController@CheckCategory');
+Route::post('/AddCats', 'AccountsController@AddCategory');
 
 Auth::routes();
 

@@ -41,19 +41,19 @@
 
                     <p class="ml-2 mb-2">Show all-> <button type="button" class="showAllBtn btn p-0" ><i class="far fa-eye text-success p-0"></i></i></button></p>
 
-                    {{-- Sort By Catagories,Accounts or Email --}}
+                    {{-- Sort By Categories,Accounts or Email --}}
                     <div class="SortBy clearfix mb-3">
-                        <a href="/SortByCat" class="btn btn-outline-primary float-left p-1 mx-1 ">Sort By Catagory</a>
+                        <a href="/SortByCat" class="btn btn-outline-primary float-left p-1 mx-1 ">Sort By Category</a>
                         <a href="/SortByAcc" class="btn btn-outline-primary float-left p-1 mx-1 ">Sort By Accounts</a>
                         <a href="/SortByEmail" class="btn btn-outline-primary float-left p-1 mx-1 ">Sort By Email</a>
-                        <a href="/GroupByCat" class="btn btn-primary float-left p-1 mx-1 ">Group By Catagory</a>
+                        <a href="/GroupByCat" class="btn btn-primary float-left p-1 mx-1 ">Group By Category</a>
                         <a href="/GroupByEmail" class="btn btn-outline-primary float-left p-1 mx-1 ">Group By Email</a>
                     </div>
                     
 
                     @if(count($accounts))
-                        @foreach ($accounts as $catagory_id => $accounts)
-                            <h4 class="text-center "><b>{{$cat_listArray[$catagory_id]}}</b></h4>
+                        @foreach ($accounts as $category_id => $accounts)
+                            <h4 class="text-center "><b>{{$cat_listArray[$category_id]}}</b></h4>
 
                             
                             <table class="table table-bordered table-dark">

@@ -17,7 +17,7 @@
               <a class="nav-link" href="/accounts/">Accounts</a>
             </li>
             <li class="nav-item {{Request::is('/accounts') ? 'active' : ''}}">
-              <a class="nav-link" href="/CheckCat">Add Catagory</a>
+              <a class="nav-link" href="/CheckCat">Add Category</a>
             </li>
             @endauth
             
